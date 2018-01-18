@@ -6,5 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
     @RequestMapping("/")
-    public String hello() { return "Hello, Spring Boot!"; }
+    public String hello() { return "Hello, Spring Boot! - Git Test"; }
 }
