@@ -17,10 +17,12 @@ public class OrderBookItemReader implements ItemReader<MinerTest> {
     private MinerTestRepository minerTestRepository;
 
     private List<MinerTest> personList;
-    private int fetchCount = 0;
+    private int fetchCount;
 
     @BeforeStep
     void beforeStep(final StepExecution stepExecution) {
+        System.out.println("=========================================beforeStep==========================");
+        fetchCount = 0; //스케쥴로 계속 실행 되기 때문에 초기화 해줌
         JobParameters parameters = stepExecution.getJobExecution().getJobParameters();
         System.out.println(parameters.getString("parameter"));
         personList = minerTestRepository.findAll();
@@ -28,6 +30,7 @@ public class OrderBookItemReader implements ItemReader<MinerTest> {
 
     @Override
     public MinerTest read() {
+        System.out.println("=========================================read==========================");
         if(fetchCount < this.personList.size()){
             return this.personList.get(fetchCount++);
         }else{
