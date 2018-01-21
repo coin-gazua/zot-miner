@@ -1,6 +1,7 @@
 package com.coingazua.zotminer.domain.reservation.entity;
 
 import com.coingazua.zotminer.domain.common.model.Currency;
+import com.coingazua.zotminer.domain.exchange.entity.Exchange;
 import com.coingazua.zotminer.domain.order.model.OrderType;
 import com.coingazua.zotminer.domain.order.model.OrderValueType;
 import com.coingazua.zotminer.domain.reservation.model.ReservationType;
@@ -23,8 +24,11 @@ public class ReservationOrder {
     @Column(name = "seq", nullable = false)
     private Long seq;
 
-    @Column(name = "user_no", nullable = false)
-    private Long user_no;
+    @Column(name = "user_seq", nullable = false)
+    private Long userSeq;
+
+    @Column(name = "exchange_seq", nullable = false)
+    private Long exchangeSeq;
 
     @Column(name = "currency", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -50,6 +54,10 @@ public class ReservationOrder {
     private Date createDt;
 
     @ManyToOne
-    @JoinColumn(name = "user_no", insertable = false, updatable = false)
+    @JoinColumn(name = "user_seq", insertable = false, updatable = false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "exchange_seq", insertable = false, updatable = false)
+    private Exchange exchange;
 }

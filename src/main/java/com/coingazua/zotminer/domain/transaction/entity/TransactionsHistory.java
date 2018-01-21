@@ -1,6 +1,7 @@
 package com.coingazua.zotminer.domain.transaction.entity;
 
 import com.coingazua.zotminer.domain.common.model.Currency;
+import com.coingazua.zotminer.domain.exchange.entity.Exchange;
 import com.coingazua.zotminer.domain.order.model.OrderType;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,9 @@ public class TransactionsHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seq", nullable = false)
     private Long seq;
+
+    @Column(name = "exchange_seq", nullable = false)
+    private Long exchangeSeq;
 
     @Column(name = "currency", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -45,4 +49,8 @@ public class TransactionsHistory {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_dt", nullable = false)
     private Date createDt;
+
+    @ManyToOne
+    @JoinColumn(name = "exchange_seq", insertable = false, updatable = false)
+    private Exchange exchange;
 }

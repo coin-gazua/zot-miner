@@ -22,7 +22,8 @@ public class ReservationOrderRepositoryTests {
 	@Transactional
 	public void testInsert(){
 		ReservationOrder reservationOrder = new ReservationOrder();
-		reservationOrder.setUser_no(1L);
+		reservationOrder.setUserSeq(1L);
+		reservationOrder.setExchangeSeq(1L);
 		reservationOrder.setOrderValue(2000L);
 		reservationOrder.setCreateDt(DateUtil.getTodayDateTime());
 		reservationOrderRepository.save(reservationOrder);
@@ -33,5 +34,6 @@ public class ReservationOrderRepositoryTests {
 	public void testManyToOne(){
 		ReservationOrder result = reservationOrderRepository.findOne(1L);
 		assertNotNull(result.getUser().getUserId());
+		assertNotNull(result.getExchange().getExchangeName());
 	}
 }
