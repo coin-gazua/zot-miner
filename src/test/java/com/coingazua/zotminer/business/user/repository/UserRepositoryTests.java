@@ -21,7 +21,7 @@ public class UserRepositoryTests {
 	@Transactional
 	public void testInsert(){
 		User user = new User();
-		user.setUserId("dssp");
+		user.setUserId("test");
 		user.setCreateDt(DateUtil.getTodayDateTime());
 		userRepository.save(user);
 	}
