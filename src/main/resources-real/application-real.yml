@@ -1,0 +1,12 @@
+spring:
+  profiles: real
+  datasource:
+    username: coin_user
+    password: coin1234
+    url: jdbc:mysql://220.72.196.222:3306/coin_buja?useUnicode=true&charaterEncoding=utf-8&autoReconnect=true&useTimezone=true&serverTimezone=UTC&connectTimeout=3000&socketTimeout=3000
+
+logging.level.org:
+  springframework:
+    web: WARN
+  hibernate: WARN
+  hibernate.type.descriptor.sql.BasicBinder: WARN

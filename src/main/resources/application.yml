@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    active: real
+  datasource:
+    username: zotAdmin
+    password: u12345u12345
+    url: jdbc:mysql://zot-miner.cmry5j8qwlqu.ap-northeast-2.rds.amazonaws.com:3306/zotMiner?useUnicode=true&charaterEncoding=utf-8&autoReconnect=true&useTimezone=true&serverTimezone=UTC&connectTimeout=3000&socketTimeout=3000
+    driverClassName: com.mysql.cj.jdbc.Driver
+    validation-query: SELECT 1
+    test-on-borrow: false
+    test-on-return: false
+  jpa:
+    database: MYSQL
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL5Dialect
+      ddl-auto: none
+      properties:
+        hibernate:
+          format_sql: true
+          show_sql: true
+          use_sql_comments: true
+  batch:
+    job:
+      #응용프로그램 실행 시 바로 실행 여부
+      enabled: false
+
+logging.level.org:
+  springframework:
+    web: INFO
+  hibernate: INFO
+  hibernate.type.descriptor.sql.BasicBinder: TRACE
