@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: real
+    active: local
   datasource:
     username: zotAdmin
     password: u12345u12345
@@ -14,11 +14,11 @@ spring:
     hibernate:
       dialect: org.hibernate.dialect.MySQL5Dialect
       ddl-auto: none
-      properties:
-        hibernate:
-          format_sql: true
-          show_sql: true
-          use_sql_comments: true
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        use_sql_comments: true
   batch:
     job:
       #응용프로그램 실행 시 바로 실행 여부
@@ -29,3 +29,6 @@ logging.level.org:
     web: INFO
   hibernate: INFO
   hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+api.base.url:
+  bithumb: https://api.bithumb.com

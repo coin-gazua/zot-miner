@@ -15,6 +15,7 @@ import java.util.Date;
 @Table(name = "exchange")
 @Getter
 @Setter
+@ToString
 public class Exchange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
