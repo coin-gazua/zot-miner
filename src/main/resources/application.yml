@@ -29,3 +29,6 @@ logging.level.org:
     web: INFO
   hibernate: INFO
   hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+api.base.url:
+  bithumb: https://api.bithumb.com

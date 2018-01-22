@@ -9,17 +9,18 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class ZotMinerApplication {
 
-	@Value("${spring.profiles.active}")
-	private String profile;
+    @Value("${spring.profiles.active}")
+    private String profile;
 
-	public static void main(String[] args) {
-		SpringApplication.run(ZotMinerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ZotMinerApplication.class, args);
+    }
 
-	@Bean
-	public CommandLineRunner runner() {
-		return (a) -> {
-			System.out.println("==================================profile:"+profile);
-		};
-	}
+
+    @Bean
+    public CommandLineRunner runner() {
+        return (a) -> {
+            System.out.println("==================================profile:" + profile);
+        };
+    }
 }
