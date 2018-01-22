@@ -66,7 +66,7 @@ public class RecentTransactionBatchConfiguration {
     @Bean
     public Step recentTransactionStep() {
         return stepBuilderFactory.get(StepNameEnum.RECENT_TRANSACTION_1.name())
-                .<TransactionsHistory, TransactionsHistory>chunk(1)
+                .<TransactionsHistory, TransactionsHistory>chunk(10)
                 .reader(recentTransactionReader())
                 .processor(recentTransactionProcessor())
                 .writer(recentTransactionWriter())

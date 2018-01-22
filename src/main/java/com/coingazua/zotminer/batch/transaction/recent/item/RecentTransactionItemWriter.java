@@ -12,11 +12,8 @@ public class RecentTransactionItemWriter implements ItemWriter<TransactionsHisto
     private TransactionsHistoryRepository transactionsHistoryRepository;
 
     @Override
-    public void write(List<? extends TransactionsHistory> _alphabet) throws Exception {
-        System.out.println("=========================================write==========================");
-        for (TransactionsHistory s : _alphabet) {
-            transactionsHistoryRepository.save(s);
-        }
+    public void write(List<? extends TransactionsHistory> transactionsHistories) throws Exception {
+        transactionsHistoryRepository.save(transactionsHistories);
     }
 }
 
