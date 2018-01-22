@@ -1,12 +1,15 @@
 package com.coingazua.zotminer.api.bithumb.client;
 
+import com.coingazua.zotminer.api.bithumb.BithumbResponseCode;
 import com.coingazua.zotminer.api.bithumb.model.RecentTransaction;
+import com.coingazua.zotminer.api.bithumb.model.RecentTransactionResponse;
 import com.coingazua.zotminer.domain.common.model.Currency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
+import java.util.List;
 
 /**
  * Created by uienw00 on 2018. 1. 22..
@@ -31,9 +34,19 @@ public class BithumbApi {
         }
     }
 
-    public void recentTransaction(Currency currency){
+    public List<RecentTransaction> recentTransaction(Currency currency){
         String uri = String.format(ApiUrl.RECENT_TRANSACTIONS.value, currency.name());
-        RecentTransaction result = restTemplate.getForObject(uri, RecentTransaction.class);
-        System.out.println(result.toString());
+        RecentTransactionResponse response = restTemplate.getForObject(uri, RecentTransactionResponse.class);
+        return getResult(response.getStatus(), response.getData());
+    }
+
+    public <T> T getResult(String status, T body){
+        BithumbResponseCode responseCode = BithumbResponseCode.get(status);
+        if(responseCode == null){
+            throw new NullPointerException("정의되지 않은 코드");
+        }else if(!BithumbResponseCode.SUCCESS.equals(responseCode)){
+            throw new RestClientException(responseCode.name());
+        }
+        return body;
     }
 }

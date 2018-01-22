@@ -1,5 +1,6 @@
 package com.coingazua.zotminer.api.bithumb.client;
 
+import com.coingazua.zotminer.api.bithumb.model.RecentTransaction;
 import com.coingazua.zotminer.domain.common.model.Currency;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +9,8 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -19,8 +22,8 @@ public class BithumbApiTests {
 	private BithumbApi bithumbApi;
 
 	@Test
-	public void testRecentTransactionJob() throws Exception {
-		bithumbApi.recentTransaction(Currency.BTC);
-		//assertTrue(jobExecution.getExitStatus().equals(ExitStatus.COMPLETED));
+	public void testRecentTransaction() throws Exception {
+		List<RecentTransaction> result = bithumbApi.recentTransaction(Currency.BTC);
+		assertTrue(result.size() > 0);
 	}
 }

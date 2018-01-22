@@ -3,16 +3,18 @@ package com.coingazua.zotminer.api.bithumb.model;
 import com.coingazua.zotminer.domain.order.model.OrderType;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 
 @Getter
 @Setter
+@ToString
 public class RecentTransaction {
-    private Date transactionDate;
+    private String transaction_date;
     private OrderType type;
-    private Double unitsTraded;
+    private Double units_traded;
     private Long price;
     private Double total;
 
