@@ -32,3 +32,4 @@ logging.level.org:
 
 api.base.url:
   bithumb: https://api.bithumb.com
+

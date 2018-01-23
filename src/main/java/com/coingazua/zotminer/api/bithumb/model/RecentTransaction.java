@@ -32,9 +32,18 @@ public class RecentTransaction {
     public TransactionsHistory convertTransactionsHistory(long exchangeSeq) {
         TransactionsHistory transactionsHistory = new TransactionsHistory();
         try {
+            int length = transaction_date.length();
+            if(length == 18){
+                //"2018-01-24 0:07:22" 10시 이전은 이런식으로 넘어와서 시간 앞에 0 붙여줌
+                transaction_date.replace(" ", " 0");
+            }else if(length < 18){
+                throw new IllegalArgumentException();
+            }
             Date date = simpleDateFormat.parse(transaction_date);
             transactionsHistory.setTransactionDate(date);
-        } catch (ParseException e) {
+        } catch (Exception e) {
+            //오류 시 현재 시간으로 설정
+            transactionsHistory.setTransactionDate(DateUtil.getTodayDateTime());
         }
 
         transactionsHistory.setExchangeSeq(exchangeSeq);

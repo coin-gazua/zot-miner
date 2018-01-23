@@ -1,13 +1,14 @@
-package com.coingazua.zotminer.batch.transaction.recent.item;
+package com.coingazua.zotminer.batch.reservation.order.item;
 
-import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 
-public class RecentTransactionItemProcessor implements ItemProcessor<TransactionsHistory, TransactionsHistory> {
+import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
 
-    private static final Logger log = LoggerFactory.getLogger(RecentTransactionItemProcessor.class);
+public class ReservationOrderItemProcessor implements ItemProcessor<TransactionsHistory, TransactionsHistory> {
+
+    private static final Logger log = LoggerFactory.getLogger(ReservationOrderItemProcessor.class);
 
     @Override
     public TransactionsHistory process(final TransactionsHistory transactionsHistory) throws Exception {

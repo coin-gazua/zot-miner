@@ -4,7 +4,8 @@ package com.coingazua.zotminer.batch;
  * Created by uienw00 on 2018. 1. 19..
  */
 public enum JobNameEnum {
-    RECENT_TRANSACTION("최근 거래 내역");
+    RECENT_TRANSACTION("최근 거래 내역"),
+    RESERVATION_ORDER("예약주문");
 
     private final String value;
 
