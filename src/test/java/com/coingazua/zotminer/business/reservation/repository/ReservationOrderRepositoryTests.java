@@ -15,25 +15,25 @@ import static org.junit.Assert.assertNotNull;
 @SpringBootTest
 public class ReservationOrderRepositoryTests {
 
-	@Autowired
-	private ReservationOrderRepository reservationOrderRepository;
+    @Autowired
+    private ReservationOrderRepository reservationOrderRepository;
 
-	@Test
-	@Transactional
-	public void testInsert(){
-		ReservationOrder reservationOrder = new ReservationOrder();
-		reservationOrder.setUserSeq(1L);
-		reservationOrder.setExchangeSeq(1L);
-		reservationOrder.setOrderValue(2000L);
-		reservationOrder.setCreateDt(DateUtil.getTodayDateTime());
-		reservationOrderRepository.save(reservationOrder);
-	}
+    @Test
+    @Transactional
+    public void testInsert() {
+        ReservationOrder reservationOrder = new ReservationOrder();
+        reservationOrder.setUserSeq(1L);
+        reservationOrder.setExchangeSeq(1L);
+        reservationOrder.setOrderValue(2000L);
+        reservationOrder.setCreateDt(DateUtil.getTodayDateTime());
+        reservationOrderRepository.save(reservationOrder);
+    }
 
-	@Test
-	@Transactional
-	public void testManyToOne(){
-		ReservationOrder result = reservationOrderRepository.findOne(1L);
-		assertNotNull(result.getUser().getUserId());
-		assertNotNull(result.getExchange().getExchangeName());
-	}
+    @Test
+    @Transactional
+    public void testManyToOne() {
+        ReservationOrder result = reservationOrderRepository.findOne(1L);
+        assertNotNull(result.getUser().getUserId());
+        assertNotNull(result.getExchange().getExchangeName());
+    }
 }

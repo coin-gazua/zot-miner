@@ -9,10 +9,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.concurrent.atomic.DoubleAccumulator;
 
 @Entity
-@Table(name = "transactions_history")
+@Table(catalog = "zotMiner", name = "transactions_history")
 @Getter
 @Setter
 @ToString

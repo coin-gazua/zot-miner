@@ -14,19 +14,19 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 public class RecentTransactionJobTests {
 
-	@Autowired
-	private JobLauncher jobLauncher;
+    @Autowired
+    private JobLauncher jobLauncher;
 
-	@Autowired
-	private Job recentTransactionJob;
+    @Autowired
+    private Job recentTransactionJob;
 
-	@Test
-	public void testRecentTransactionJob() throws Exception {
-		JobParameters jobParameter = new JobParametersBuilder()
-				.addLong("time",System.currentTimeMillis())
-				.addString("parameter", "test")
-				.toJobParameters();
-		JobExecution jobExecution = jobLauncher.run(recentTransactionJob, jobParameter);
-		assertTrue(jobExecution.getExitStatus().equals(ExitStatus.COMPLETED));
-	}
+    @Test
+    public void testRecentTransactionJob() throws Exception {
+        JobParameters jobParameter = new JobParametersBuilder()
+                .addLong("time", System.currentTimeMillis())
+                .addString("parameter", "test")
+                .toJobParameters();
+        JobExecution jobExecution = jobLauncher.run(recentTransactionJob, jobParameter);
+        assertTrue(jobExecution.getExitStatus().equals(ExitStatus.COMPLETED));
+    }
 }

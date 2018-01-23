@@ -1,15 +1,5 @@
 package com.coingazua.zotminer.batch.transaction.recent.item;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.batch.core.StepExecution;
-import org.springframework.batch.core.annotation.BeforeStep;
-import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.item.ItemReader;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.coingazua.zotminer.api.bithumb.client.BithumbApi;
 import com.coingazua.zotminer.business.exchange.service.ExchangeService;
 import com.coingazua.zotminer.business.reservation.repository.ReservationOrderRepository;
@@ -17,6 +7,15 @@ import com.coingazua.zotminer.domain.common.model.Currency;
 import com.coingazua.zotminer.domain.exchange.entity.Exchange;
 import com.coingazua.zotminer.domain.reservation.entity.ReservationOrder;
 import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
+import org.springframework.batch.core.StepExecution;
+import org.springframework.batch.core.annotation.BeforeStep;
+import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @StepScope
 public class RecentTransactionItemReader implements ItemReader<TransactionsHistory> {
@@ -41,7 +40,7 @@ public class RecentTransactionItemReader implements ItemReader<TransactionsHisto
 
         List<Exchange> exchanges = exchangeService.getAllExchange();
         exchanges.forEach(exchange -> {
-            switch (exchange.getExchangeName()){
+            switch (exchange.getExchangeName()) {
                 case BITHUMB:
                     //거래소에 들어가 있는 예약 주문 정보 조회
                     List<ReservationOrder> reservationOrders = reservationOrderRepository.findByExchangeSeq(exchange.getSeq());
@@ -58,9 +57,9 @@ public class RecentTransactionItemReader implements ItemReader<TransactionsHisto
     @Override
     public TransactionsHistory read() {
         System.out.println("=========================================read==========================");
-        if(fetchCount < this.transactionsHistories.size()){
+        if (fetchCount < this.transactionsHistories.size()) {
             return this.transactionsHistories.get(fetchCount++);
-        }else{
+        } else {
             return null;
         }
     }

@@ -1,7 +1,6 @@
 package com.coingazua.zotminer.batch.transaction.recent.item;
 
 import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
-import com.coingazua.zotminer.domain.user.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;

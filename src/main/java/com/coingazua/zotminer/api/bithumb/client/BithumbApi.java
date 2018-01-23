@@ -23,20 +23,21 @@ public class BithumbApi {
     private static String baseUrl;
 
     @Value("${api.base.url.bithumb}")
-    public void setBaseUrl(String baseUrl){
+    public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
     }
 
-    private enum ApiUrl{
+    private enum ApiUrl {
         RECENT_TRANSACTIONS(baseUrl + "/public/recent_transactions/%s");
 
         private final String value;
-        ApiUrl(final String value){
+
+        ApiUrl(final String value) {
             this.value = value;
         }
     }
 
-    public List<TransactionsHistory> recentTransaction(Long exchangeSeq, Currency currency){
+    public List<TransactionsHistory> recentTransaction(Long exchangeSeq, Currency currency) {
         String uri = String.format(ApiUrl.RECENT_TRANSACTIONS.value, currency.name());
         RecentTransactionResponse response = restTemplate.getForObject(uri, RecentTransactionResponse.class);
         List<RecentTransaction> recentTransactions = getResult(response.getStatus(), response.getData());
@@ -44,11 +45,11 @@ public class BithumbApi {
                 .collect(Collectors.toList());
     }
 
-    public <T> T getResult(String status, T body){
+    public <T> T getResult(String status, T body) {
         BithumbResponseCode responseCode = BithumbResponseCode.get(status);
-        if(responseCode == null){
+        if (responseCode == null) {
             throw new NullPointerException("정의되지 않은 코드");
-        }else if(!BithumbResponseCode.SUCCESS.equals(responseCode)){
+        } else if (!BithumbResponseCode.SUCCESS.equals(responseCode)) {
             throw new RestClientException(responseCode.name());
         }
         return body;

@@ -6,7 +6,10 @@ public enum ExchangeName {
     OKCOIN("오케이코인");
 
     private final String value;
-    ExchangeName(final String value){this.value = value;}
+
+    ExchangeName(final String value) {
+        this.value = value;
+    }
 
     public String getValue() {
         return value;

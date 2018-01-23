@@ -7,7 +7,10 @@ public enum JobNameEnum {
     RECENT_TRANSACTION("최근 거래 내역");
 
     private final String value;
-    JobNameEnum(final String value){this.value = value;}
+
+    JobNameEnum(final String value) {
+        this.value = value;
+    }
 
     public String getValue() {
         return value;
