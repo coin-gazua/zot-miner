@@ -1,7 +1,5 @@
 package com.coingazua.zotminer.configuration;
 
-import javax.sql.DataSource;
-
 import org.springframework.batch.core.launch.support.SimpleJobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
@@ -10,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.sql.DataSource;
 
 
 @Configuration
@@ -40,7 +40,7 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public SimpleJobLauncher jobLauncher(JobRepository jobRepository){
+    public SimpleJobLauncher jobLauncher(JobRepository jobRepository) {
         SimpleJobLauncher launcher = new SimpleJobLauncher();
         launcher.setJobRepository(jobRepository);
         return launcher;

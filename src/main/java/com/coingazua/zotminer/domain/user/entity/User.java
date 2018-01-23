@@ -1,5 +1,6 @@
 package com.coingazua.zotminer.domain.user.entity;
 
+import com.coingazua.zotminer.domain.order.entity.Order;
 import com.coingazua.zotminer.domain.reservation.entity.ReservationOrder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -12,10 +13,10 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(catalog = "zotMiner", name = "user")
 @Getter
 @Setter
-@ToString(exclude = { "reservationOrderList", "userExchangeList" })
+@ToString(exclude = {"reservationOrderList", "userExchangeList", "orderList"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +37,8 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<UserExchange> userExchangeList = new ArrayList<UserExchange>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Order> orderList = new ArrayList<Order>();
 }

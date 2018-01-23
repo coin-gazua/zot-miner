@@ -8,29 +8,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserRepositoryTests {
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Test
-	@Transactional
-	public void testInsert(){
-		User user = new User();
-		user.setUserId("test");
-		user.setCreateDt(DateUtil.getTodayDateTime());
-		userRepository.save(user);
-	}
+    @Test
+    @Transactional
+    public void testInsert() {
+        User user = new User();
+        user.setUserId("test");
+        user.setCreateDt(DateUtil.getTodayDateTime());
+        userRepository.save(user);
+    }
 
-	@Test
-	@Transactional
-	public void testOneToMany(){
-		User result = userRepository.findOne(1L);
-		assertTrue(result.getReservationOrderList().size() > 0);
-		assertTrue(result.getUserExchangeList().size() > 0);
-	}
+    @Test
+    @Transactional
+    public void testOneToMany() {
+        User result = userRepository.findOne(1L);
+        assertTrue(result.getReservationOrderList().size() > 0);
+        assertTrue(result.getUserExchangeList().size() > 0);
+    }
 }

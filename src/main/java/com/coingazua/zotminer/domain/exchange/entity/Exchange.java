@@ -1,18 +1,15 @@
 package com.coingazua.zotminer.domain.exchange.entity;
 
-import javax.persistence.*;
-
 import com.coingazua.zotminer.domain.exchange.model.ExchangeName;
-import com.coingazua.zotminer.domain.user.entity.User;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "exchange")
+@Table(catalog = "zotMiner", name = "exchange")
 @Getter
 @Setter
 @ToString

@@ -14,7 +14,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "reservation_order")
+@Table(catalog = "zotMiner", name = "reservation_order")
 @Getter
 @Setter
 @ToString
@@ -48,6 +48,12 @@ public class ReservationOrder {
     @Column(name = "order_value_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderValueType orderValueType = OrderValueType.PRICE;
+
+    @Column(name = "is_use", nullable = false)
+    private boolean isUse = true;
+
+    @Column(name = "is_order", nullable = false)
+    private boolean isOrder = false;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_dt", nullable = false)

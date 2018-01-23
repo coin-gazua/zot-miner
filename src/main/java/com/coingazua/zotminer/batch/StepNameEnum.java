@@ -7,7 +7,10 @@ public enum StepNameEnum {
     RECENT_TRANSACTION_1("최근 거래 내역 스텝1");
 
     private final String value;
-    StepNameEnum(final String value){this.value = value;}
+
+    StepNameEnum(final String value) {
+        this.value = value;
+    }
 
     public String getValue() {
         return value;

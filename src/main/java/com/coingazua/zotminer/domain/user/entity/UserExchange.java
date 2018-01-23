@@ -1,20 +1,14 @@
 package com.coingazua.zotminer.domain.user.entity;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.*;
-
-import com.coingazua.zotminer.domain.reservation.entity.ReservationOrder;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.*;
+import java.util.Date;
+
 @Entity
-@Table(name = "user_exchange")
+@Table(catalog = "zotMiner", name = "user_exchange")
 @Getter
 @Setter
 @ToString(exclude = "reservationOrderList")
