@@ -1,9 +1,12 @@
 package com.coingazua.zotminer.batch.transaction.recent.item;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.coingazua.zotminer.api.bithumb.client.BithumbApi;
+import com.coingazua.zotminer.business.exchange.service.ExchangeService;
+import com.coingazua.zotminer.business.reservation.repository.ReservationOrderRepository;
+import com.coingazua.zotminer.business.transaction.repository.TransactionsHistoryRepository;
+import com.coingazua.zotminer.domain.common.model.Currency;
+import com.coingazua.zotminer.domain.exchange.entity.Exchange;
+import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.scope.context.ChunkContext;
@@ -11,14 +14,8 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.coingazua.zotminer.api.bithumb.client.BithumbApi;
-import com.coingazua.zotminer.business.exchange.service.ExchangeService;
-import com.coingazua.zotminer.business.reservation.repository.ReservationOrderRepository;
-import com.coingazua.zotminer.business.transaction.repository.TransactionsHistoryRepository;
-import com.coingazua.zotminer.domain.common.model.Currency;
-import com.coingazua.zotminer.domain.exchange.entity.Exchange;
-import com.coingazua.zotminer.domain.reservation.entity.ReservationOrder;
-import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
+import java.util.ArrayList;
+import java.util.List;
 
 @StepScope
 public class RecentTransactionTasklet implements Tasklet {
@@ -35,7 +32,7 @@ public class RecentTransactionTasklet implements Tasklet {
     private TransactionsHistoryRepository transactionsHistoryRepository;
 
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-        List<TransactionsHistory> transactionsHistories = new ArrayList<>();;
+        List<TransactionsHistory> transactionsHistories = new ArrayList<>();
 
         List<Exchange> exchanges = exchangeService.getAllExchange();
         exchanges.forEach(exchange -> {

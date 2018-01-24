@@ -27,9 +27,9 @@ public class ZotMinerApplication {
 
     @Bean
     public JPAQueryFactory queryFactory() {
-//return new JPAQueryFactory(JPQLTemplates.DEFAULT, em);
         return new JPAQueryFactory(entityManager);
     }
+
 /*
     @Bean
     public CommandLineRunner runner() {
