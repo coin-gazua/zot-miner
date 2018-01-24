@@ -50,6 +50,6 @@ public class TransactionsHistory {
     private Date createDt;
 
     @ManyToOne
-    @JoinColumn(name = "exchange_seq", insertable = false, updatable = false)
+    @JoinColumn(name = "seq", insertable = false, updatable = false)
     private Exchange exchange;
 }

@@ -60,11 +60,11 @@ public class ReservationOrder {
     @Column(name = "create_dt", nullable = false)
     private Date createDt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_seq", insertable = false, updatable = false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exchange_seq", insertable = false, updatable = false)
     private Exchange exchange;
 }

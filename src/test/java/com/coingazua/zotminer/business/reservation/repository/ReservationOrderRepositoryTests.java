@@ -2,7 +2,9 @@ package com.coingazua.zotminer.business.reservation.repository;
 
 import com.coingazua.zotminer.common.util.DateUtil;
 import com.coingazua.zotminer.domain.common.model.Currency;
+import com.coingazua.zotminer.domain.exchange.entity.Exchange;
 import com.coingazua.zotminer.domain.reservation.entity.ReservationOrder;
+import com.coingazua.zotminer.domain.user.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

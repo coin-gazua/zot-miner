@@ -26,6 +26,9 @@ public class User {
     @Column(name = "user_id", nullable = false)
     private String userId;
 
+    @Column(name = "is_use", nullable = false)
+    private boolean isUse = true;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_dt", nullable = false)
     private Date createDt;

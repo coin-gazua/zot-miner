@@ -1,8 +1,8 @@
 package com.coingazua.zotminer.api.bithumb.client;
 
 import com.coingazua.zotminer.api.bithumb.BithumbResponseCode;
+import com.coingazua.zotminer.api.bithumb.BithumbResponse;
 import com.coingazua.zotminer.api.bithumb.model.RecentTransaction;
-import com.coingazua.zotminer.api.bithumb.model.RecentTransactionResponse;
 import com.coingazua.zotminer.domain.common.model.Currency;
 import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * Created by uienw00 on 2018. 1. 22..
  */
-public class BithumbApi {
+public class BithumbApi<T extends BithumbResponse> {
     @Autowired
     private RestTemplate restTemplate;
 
@@ -39,11 +39,13 @@ public class BithumbApi {
 
     public List<TransactionsHistory> recentTransaction(Long exchangeSeq, Currency currency) {
         String uri = String.format(ApiUrl.RECENT_TRANSACTIONS.value, currency.name());
-        RecentTransactionResponse response = restTemplate.getForObject(uri, RecentTransactionResponse.class);
+
+        BithumbResponse<RecentTransaction> response = restTemplate.getForObject(uri, BithumbResponse.class);
         List<RecentTransaction> recentTransactions = getResult(response.getStatus(), response.getData());
         return recentTransactions.stream().map(recentTransaction -> recentTransaction.convertTransactionsHistory(exchangeSeq))
                 .collect(Collectors.toList());
     }
+
 
     public <T> T getResult(String status, T body) {
         BithumbResponseCode responseCode = BithumbResponseCode.get(status);
