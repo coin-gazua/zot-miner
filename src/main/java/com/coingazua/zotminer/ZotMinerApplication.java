@@ -1,11 +1,15 @@
 package com.coingazua.zotminer;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @SpringBootApplication
 @EnableCaching
@@ -16,6 +20,14 @@ public class ZotMinerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ZotMinerApplication.class, args);
+    }
+
+    @PersistenceContext
+    EntityManager entityManager;
+
+    @Bean
+    public JPAQueryFactory queryFactory() {
+        return new JPAQueryFactory(entityManager);
     }
 
 /*

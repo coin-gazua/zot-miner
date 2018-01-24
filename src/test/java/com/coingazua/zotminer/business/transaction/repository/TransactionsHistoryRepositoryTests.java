@@ -25,7 +25,7 @@ public class TransactionsHistoryRepositoryTests {
     public void testInsert() {
         Date currentDate = DateUtil.getTodayDateTime();
         TransactionsHistory transactionsHistory = new TransactionsHistory();
-        transactionsHistory.setSeq(1L);
+        transactionsHistory.setExchangeSeq(1L);
         transactionsHistory.setPrice(1000L);
         transactionsHistory.setUnitsTraded(1.2);
         transactionsHistory.setTotal(transactionsHistory.getPrice() * transactionsHistory.getUnitsTraded());
@@ -37,7 +37,7 @@ public class TransactionsHistoryRepositoryTests {
     @Test
     @Transactional
     public void testManyToOne() {
-        TransactionsHistory result = transactionsHistoryRepository.findOne(1L);
+        TransactionsHistory result = transactionsHistoryRepository.findOne(5134L);
         assertNotNull(result.getExchange().getExchangeName());
     }
 

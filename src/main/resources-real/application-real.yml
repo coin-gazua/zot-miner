@@ -3,7 +3,7 @@ spring:
   datasource:
     username: coin_user
     password: coin1234
-    url: jdbc:mysql://220.72.196.222:3306/coin_buja?useUnicode=true&charaterEncoding=utf-8&autoReconnect=true&useTimezone=true&serverTimezone=UTC&connectTimeout=3000&socketTimeout=3000
+    url: jdbc:mysql://121.161.224.119:3306/coin_buja?useUnicode=true&charaterEncoding=utf-8&autoReconnect=true&useTimezone=true&serverTimezone=UTC&connectTimeout=3000&socketTimeout=3000
 
 logging.level.org:
   springframework:

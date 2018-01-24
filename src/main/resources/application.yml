@@ -19,6 +19,7 @@ spring:
         format_sql: true
         show_sql: true
         use_sql_comments: true
+
   batch:
     job:
       #응용프로그램 실행 시 바로 실행 여부
@@ -32,3 +33,4 @@ logging.level.org:
 
 api.base.url:
   bithumb: https://api.bithumb.com
+
