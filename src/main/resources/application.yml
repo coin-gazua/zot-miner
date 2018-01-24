@@ -4,7 +4,7 @@ spring:
   datasource:
     username: zotAdmin
     password: u12345u12345
-    url: jdbc:mysql://zot-miner.cmry5j8qwlqu.ap-northeast-2.rds.amazonaws.com:3306/zotMiner?useUnicode=true&charaterEncoding=utf-8&autoReconnect=true&useTimezone=true&serverTimezone=UTC&connectTimeout=3000&socketTimeout=3000
+    url: jdbc:mysql://zot-miner.cmry5j8qwlqu.ap-northeast-2.rds.amazonaws.com:3306/zotMiner?useUnicode=true&charaterEncoding=utf-8&autoReconnect=true&connectTimeout=3000&socketTimeout=3000
     driverClassName: com.mysql.cj.jdbc.Driver
     validation-query: SELECT 1
     test-on-borrow: false

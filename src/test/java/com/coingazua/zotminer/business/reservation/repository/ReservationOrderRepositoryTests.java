@@ -34,7 +34,12 @@ public class ReservationOrderRepositoryTests {
     }
 
     @Test
-    @Transactional
+    public void testFindAll() {
+        List<ReservationOrder> result = reservationOrderRepository.findAll();
+        assertTrue(result.size() > 0);
+    }
+
+    @Test
     public void testManyToOne() {
         ReservationOrder result = reservationOrderRepository.findOne(1L);
         assertNotNull(result.getUser().getUserId());
@@ -45,5 +50,11 @@ public class ReservationOrderRepositoryTests {
     public void testGetGroupBy(){
         List<Currency> result = reservationOrderRepository.getGroupBy(true);
         assertTrue(result.size() > 0);
+    }
+
+    @Test
+    public void testFindFirstByUserSeqAndExchangeSeqAndIsOrderAndIsUseOrderBySeqDesc(){
+        ReservationOrder result =reservationOrderRepository.findFirstByUserSeqAndExchangeSeqAndIsOrderAndIsUseOrderBySeqDesc(1L, 1L, false, true);
+        assertNotNull(result);
     }
 }

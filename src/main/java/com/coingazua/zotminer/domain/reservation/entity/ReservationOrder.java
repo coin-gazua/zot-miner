@@ -6,6 +6,7 @@ import com.coingazua.zotminer.domain.order.model.OrderType;
 import com.coingazua.zotminer.domain.order.model.OrderValueType;
 import com.coingazua.zotminer.domain.reservation.model.ReservationType;
 import com.coingazua.zotminer.domain.user.entity.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

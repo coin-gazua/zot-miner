@@ -31,14 +31,11 @@ public class User {
     private Date createDt;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<ReservationOrder> reservationOrderList = new ArrayList<ReservationOrder>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<UserExchange> userExchangeList = new ArrayList<UserExchange>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Order> orderList = new ArrayList<Order>();
 }
