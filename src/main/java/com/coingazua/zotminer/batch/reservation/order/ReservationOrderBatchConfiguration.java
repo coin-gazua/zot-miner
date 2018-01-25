@@ -37,9 +37,9 @@ public class ReservationOrderBatchConfiguration {
 
 	@Scheduled(fixedRate = 1000)
 	public void perform() throws Exception {
-		/*JobParameters param = new JobParametersBuilder().addString(JobNameEnum.RESERVATION_ORDER.name(),
+		JobParameters param = new JobParametersBuilder().addString(JobNameEnum.RESERVATION_ORDER.name(),
 		        String.valueOf(System.currentTimeMillis())).toJobParameters();
-		jobLauncher.run(reservationOrderJob(), param);*/
+		jobLauncher.run(reservationOrderJob(), param);
 	}
 
 	@Bean
