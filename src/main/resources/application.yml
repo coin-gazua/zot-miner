@@ -30,3 +30,7 @@ logging.level.org:
 api.base.url:
   bithumb: https://api.bithumb.com
 
+batch: 
+  deleteTransaction:
+    #주문히스토리 삭제 기준일. 해당 일자 이전 데이터 삭제
+    deleteDate: 3

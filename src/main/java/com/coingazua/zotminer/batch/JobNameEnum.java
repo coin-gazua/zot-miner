@@ -5,7 +5,8 @@ package com.coingazua.zotminer.batch;
  */
 public enum JobNameEnum {
     RECENT_TRANSACTION("최근 거래 내역"),
-    RESERVATION_ORDER("예약주문");
+    RESERVATION_ORDER("예약주문"),
+    DELETE_TRANSACTION("거래 내역 삭제");
 
     private final String value;
 
