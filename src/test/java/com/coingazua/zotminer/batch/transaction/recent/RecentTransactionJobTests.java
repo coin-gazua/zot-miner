@@ -10,6 +10,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RecentTransactionJobTests {

@@ -5,7 +5,8 @@ package com.coingazua.zotminer.batch;
  */
 public enum StepNameEnum {
     RECENT_TRANSACTION_1("최근 거래 내역 스텝1"),
-    RESERVATION_ORDER_1("예약 주문 스텝1");
+    RESERVATION_ORDER_1("예약 주문 스텝1"),
+    DELETE_TRANSACTION_1("거래 내역 삭제 스텝1");
 
     private final String value;
 
