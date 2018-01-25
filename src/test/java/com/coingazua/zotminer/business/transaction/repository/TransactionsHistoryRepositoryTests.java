@@ -37,7 +37,7 @@ public class TransactionsHistoryRepositoryTests {
     @Test
     public void testManyToOne() {
         TransactionsHistory result = transactionsHistoryRepository.findOne(5134L);
-        assertNotNull(result.getExchange().getExchangeName());
+        assertNotNull(result);
     }
 
 }

@@ -1,16 +1,21 @@
 package com.coingazua.zotminer.api.bithumb.client;
 
-import com.coingazua.zotminer.api.bithumb.BithumbResponseCode;
 import com.coingazua.zotminer.api.bithumb.BithumbResponse;
+import com.coingazua.zotminer.api.bithumb.BithumbResponseCode;
 import com.coingazua.zotminer.api.bithumb.model.RecentTransaction;
 import com.coingazua.zotminer.domain.common.model.Currency;
 import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -28,7 +33,8 @@ public class BithumbApi<T extends BithumbResponse> {
     }
 
     private enum ApiUrl {
-        RECENT_TRANSACTIONS(baseUrl + "/public/recent_transactions/%s");
+        RECENT_TRANSACTIONS(baseUrl + "/public/recent_transactions/%s"),
+        BALANCE_INFO(baseUrl + "/info/balance");
 
         private final String value;
 
@@ -37,14 +43,29 @@ public class BithumbApi<T extends BithumbResponse> {
         }
     }
 
+    /**
+     * 최근 거래 내역 조회
+     * @param exchangeSeq
+     * @param currency
+     * @return
+     */
     public List<TransactionsHistory> recentTransaction(Long exchangeSeq, Currency currency) {
         String uri = String.format(ApiUrl.RECENT_TRANSACTIONS.value, currency.name());
 
-        BithumbResponse<RecentTransaction> response = restTemplate.getForObject(uri, BithumbResponse.class);
-        List<RecentTransaction> recentTransactions = getResult(response.getStatus(), response.getData());
+        ResponseEntity<BithumbResponse<RecentTransaction>> response = restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<BithumbResponse<RecentTransaction>>() {
+        });
+
+        List<RecentTransaction> recentTransactions = getResult(response.getBody().getStatus(), response.getBody().getData());
         return recentTransactions.stream().map(recentTransaction -> recentTransaction.convertTransactionsHistory(exchangeSeq))
                 .collect(Collectors.toList());
     }
+
+    public Map<String, Object> balanceInfo(){
+        String uri = ApiUrl.BALANCE_INFO.value;
+
+        return restTemplate.getForObject(uri, HashMap.class);
+    }
+
 
 
     public <T> T getResult(String status, T body) {

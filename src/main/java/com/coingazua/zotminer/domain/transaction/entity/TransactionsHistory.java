@@ -49,7 +49,7 @@ public class TransactionsHistory {
     @Column(name = "create_dt", nullable = false)
     private Date createDt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seq", insertable = false, updatable = false)
     private Exchange exchange;
 }
