@@ -7,6 +7,7 @@ import org.springframework.web.client.HttpServerErrorException;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Optional;
 
 
 @SuppressWarnings("unused")
@@ -139,6 +140,8 @@ public class BithumbApiClient {
             }
         }
 
-        return (HashMap<String, String>)result.get("data");
+        return Optional.ofNullable(result)
+                .map(r -> (HashMap<String, String>)r.get("data"))
+                .orElseThrow(() -> new NullPointerException());
     }
 }

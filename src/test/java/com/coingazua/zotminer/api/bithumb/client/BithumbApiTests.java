@@ -1,7 +1,9 @@
 package com.coingazua.zotminer.api.bithumb.client;
 
 import com.coingazua.zotminer.api.bithumb.model.BalanceInfo;
+import com.coingazua.zotminer.batch.reservation.order.model.ExchangeOrder;
 import com.coingazua.zotminer.domain.common.model.Currency;
+import com.coingazua.zotminer.domain.reservation.entity.ReservationOrder;
 import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
 import com.coingazua.zotminer.domain.user.entity.UserExchange;
 import org.junit.Test;
@@ -29,16 +31,16 @@ public class BithumbApiTests {
         assertTrue(result.size() > 0);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testBalanceInfo(){
-        UserExchange userExchange = new UserExchange();
-        userExchange.setApiKey("9c65f1c7382779d016d3e70bf8b0ac4d");
-        userExchange.setSecretKey("6875876a29000e57c667ee460dcb60db");
-       /* userExchange.setApiKey("d3528f73f00ff12a1c8fc19f73409934");
-        userExchange.setSecretKey("6a203d99fb52ab7aefb3c518af643ad6");*/
-        BalanceInfo result = bithumbApi.balanceInfo(userExchange, Currency.XRP);
+        String apiKey = "1111";
+        String secretKey = "2222";
+        ReservationOrder reservationOrder = new ReservationOrder();
+        reservationOrder.setCurrency(Currency.BTC);
+        ExchangeOrder exchangeOrder = new ExchangeOrder(apiKey, secretKey, reservationOrder);
+        BalanceInfo result = bithumbApi.balanceInfo(exchangeOrder);
         System.out.println(result.getInUseCurrency());
         System.out.println(result.toString());
-        assertNotNull(result);
+        //assertNotNull(result);
     }
 }

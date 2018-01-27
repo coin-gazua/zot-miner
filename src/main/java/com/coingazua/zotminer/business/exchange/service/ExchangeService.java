@@ -14,7 +14,7 @@ public class ExchangeService {
     private ExchangeRepository exchangeRepository;
 
     @Cacheable(value = "exchange")
-    public List<Exchange> getAllExchange() {
+    public List<Exchange> getCacheableAllExchange() {
         return exchangeRepository.findAll();
     }
 }

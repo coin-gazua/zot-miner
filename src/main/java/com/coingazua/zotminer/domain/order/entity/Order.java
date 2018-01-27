@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(catalog = "zotMiner", name = "order")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"user", "reservationOrder"})
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

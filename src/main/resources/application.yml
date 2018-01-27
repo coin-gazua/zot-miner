@@ -34,3 +34,6 @@ batch:
   deleteTransaction:
     #주문히스토리 삭제 기준일. 해당 일자 이전 데이터 삭제
     deleteDate: 3
+  reservationOrder:
+    #10초 간의 거래체결 내역 조회
+    transactionHistoryTime: 10

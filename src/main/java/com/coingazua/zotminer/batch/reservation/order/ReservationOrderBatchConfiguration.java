@@ -1,8 +1,6 @@
 package com.coingazua.zotminer.batch.reservation.order;
 
-import com.coingazua.zotminer.batch.reservation.order.item.ReservationOrderItemProcessor;
-import com.coingazua.zotminer.batch.reservation.order.item.ReservationOrderItemReader;
-import com.coingazua.zotminer.batch.reservation.order.item.ReservationOrderItemWriter;
+import com.coingazua.zotminer.batch.reservation.order.model.ExchangeOrder;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -19,8 +17,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.coingazua.zotminer.batch.JobNameEnum;
 import com.coingazua.zotminer.batch.StepNameEnum;
-
-import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
+import com.coingazua.zotminer.batch.reservation.order.item.ReservationOrderItemProcessor;
+import com.coingazua.zotminer.batch.reservation.order.item.ReservationOrderItemReader;
+import com.coingazua.zotminer.batch.reservation.order.item.ReservationOrderItemWriter;
 
 @Configuration
 @EnableBatchProcessing
@@ -67,9 +66,8 @@ public class ReservationOrderBatchConfiguration {
 	@Bean
 	public Step reservationOrderStep() {
 		return stepBuilderFactory.get(StepNameEnum.RESERVATION_ORDER_1.name())
-		        .<TransactionsHistory, TransactionsHistory> chunk(1)
+				.<ExchangeOrder, ExchangeOrder>chunk(1)
 		        .reader(reservationOrderReader())
-		        .processor(reservationOrderProcessor())
 		        .writer(reservationOrderWriter())
 		        .build();
 	}

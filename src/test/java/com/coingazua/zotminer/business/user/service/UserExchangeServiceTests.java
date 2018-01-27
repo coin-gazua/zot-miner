@@ -22,15 +22,9 @@ public class UserExchangeServiceTests {
 	@Test
 	public void testGetUserExchange() {
 		//userSeq 별로 쿼리 한번만 나가는지 캐쉬 테스트
-		Long userSeq = 1L;
-		List<UserExchange> result = userExchangeService.getUserExchange(userSeq);
+		List<UserExchange> result = userExchangeService.getCacheableUserExchange(true);
 		System.out.println(result.toString());
-		result = userExchangeService.getUserExchange(userSeq);
-		System.out.println(result.toString());
-		userSeq = 12L;
-		result = userExchangeService.getUserExchange(userSeq);
-		System.out.println(result.toString());
-		result = userExchangeService.getUserExchange(userSeq);
+		result = userExchangeService.getCacheableUserExchange(true);
 		System.out.println(result.toString());
 		assertTrue(result.size() > 0);
 	}

@@ -54,8 +54,8 @@ public class ReservationOrderRepositoryTests {
     }
 
     @Test
-    public void testFindFirstByUserSeqAndExchangeSeqAndIsOrderAndIsUseOrderBySeqDesc(){
-        ReservationOrder result =reservationOrderRepository.findFirstByUserSeqAndExchangeSeqAndIsOrderAndIsUseOrderBySeqDesc(1L, 1L, false, true);
+    public void testFindByUserSeqAndExchangeSeqAndIsOrderAndIsUse(){
+        List<ReservationOrder> result =reservationOrderRepository.findByUserSeqAndExchangeSeqAndIsOrderAndIsUse(1L, 1L, false, true);
         assertNotNull(result);
     }
 }

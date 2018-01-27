@@ -12,7 +12,7 @@ import java.util.Date;
 @Table(catalog = "zotMiner", name = "user_exchange")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"user", "exchange"})
 public class UserExchange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

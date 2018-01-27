@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+import com.coingazua.zotminer.domain.common.model.Currency;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,12 @@ public class TransactionsHistoryRepositoryTests {
         	.filter( o -> o.getCreateDt().after(deleteDate) )
         	.count();        
         assertTrue(deleteCount == 0);
+    }
+
+    @Test
+    public void testFindByCreateDtGreaterThanAndCurrency(){
+        Date searchDate = Date.from(LocalDateTime.now().minusSeconds(10).atZone(ZoneId.systemDefault()).toInstant());
+        List<TransactionsHistory> result = transactionsHistoryRepository.findByCreateDtGreaterThanAndCurrency(searchDate, Currency.XRP);
+        assertNotNull(result);
     }
 }

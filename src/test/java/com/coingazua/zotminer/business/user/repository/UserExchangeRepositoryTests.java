@@ -35,8 +35,8 @@ public class UserExchangeRepositoryTests {
 	}
 
 	@Test
-	public void testFindByUserSeq() {
-		List<UserExchange> result = userExchangeRepository.findByUserSeq(1L);
+	public void testGetUserExchange() {
+		List<UserExchange> result = userExchangeRepository.getUserExchange(true);
 		assertTrue(result.size() > 0);
 	}
 }

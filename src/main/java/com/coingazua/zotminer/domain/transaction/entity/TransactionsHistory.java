@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(catalog = "zotMiner", name = "transactions_history")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"exchange"})
 public class TransactionsHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

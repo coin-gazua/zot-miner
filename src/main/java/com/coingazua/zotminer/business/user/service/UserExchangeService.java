@@ -16,8 +16,8 @@ public class UserExchangeService {
     @Autowired
     private UserExchangeRepository userExchangeRepository;
 
-    @Cacheable(key = "#userSeq", value = "userExchange")
-    public List<UserExchange> getUserExchange(Long userSeq) {
-        return userExchangeRepository.findByUserSeq(userSeq);
+    @Cacheable(value = "userExchange")
+    public List<UserExchange> getCacheableUserExchange(boolean isUse) {
+        return userExchangeRepository.getUserExchange(isUse);
     }
 }

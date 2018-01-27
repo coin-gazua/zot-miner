@@ -1,18 +1,14 @@
 package com.coingazua.zotminer.api.bithumb.model;
 
-import com.coingazua.zotminer.common.util.DateUtil;
+import java.util.Map;
+
+import org.apache.commons.collections4.MapUtils;
+
 import com.coingazua.zotminer.domain.common.model.Currency;
-import com.coingazua.zotminer.domain.order.model.OrderType;
-import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
 
 @Getter
 @Setter

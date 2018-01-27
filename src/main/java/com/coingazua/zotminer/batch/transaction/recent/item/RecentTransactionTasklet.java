@@ -34,7 +34,7 @@ public class RecentTransactionTasklet implements Tasklet {
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
         List<TransactionsHistory> transactionsHistories = new ArrayList<>();
 
-        List<Exchange> exchanges = exchangeService.getAllExchange();
+        List<Exchange> exchanges = exchangeService.getCacheableAllExchange();
         exchanges.forEach(exchange -> {
             switch (exchange.getExchangeName()) {
                 case BITHUMB:
