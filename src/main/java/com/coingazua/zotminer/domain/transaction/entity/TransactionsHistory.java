@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(catalog = "zotMiner", name = "transactions_history")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"exchange"})
 public class TransactionsHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +49,7 @@ public class TransactionsHistory {
     @Column(name = "create_dt", nullable = false)
     private Date createDt;
 
-    @ManyToOne
-    @JoinColumn(name = "exchange_seq", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seq", insertable = false, updatable = false)
     private Exchange exchange;
 }

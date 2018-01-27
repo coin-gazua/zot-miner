@@ -31,6 +31,7 @@ public class UserRepositoryTests {
     @Transactional
     public void testOneToMany() {
         User result = userRepository.findOne(1L);
+        result.toString();
         assertTrue(result.getReservationOrderList().size() > 0);
         assertTrue(result.getUserExchangeList().size() > 0);
     }

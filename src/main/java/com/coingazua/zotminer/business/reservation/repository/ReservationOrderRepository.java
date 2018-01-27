@@ -7,4 +7,5 @@ import java.util.List;
 
 
 public interface ReservationOrderRepository extends JpaRepository<ReservationOrder, Long>, ReservationOrderRepositoryCustom {
+    List<ReservationOrder> findByUserSeqAndExchangeSeqAndIsOrderAndIsUse(Long userSeq, Long exchangeSeq, boolean isOrder, boolean isUse);
 }

@@ -1,34 +1,40 @@
 package com.coingazua.zotminer.api.bithumb.client;
 
-import com.coingazua.zotminer.api.bithumb.BithumbResponseCode;
-import com.coingazua.zotminer.api.bithumb.model.RecentTransaction;
-import com.coingazua.zotminer.api.bithumb.model.RecentTransactionResponse;
-import com.coingazua.zotminer.domain.common.model.Currency;
-import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.coingazua.zotminer.batch.reservation.order.model.ExchangeOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.coingazua.zotminer.api.bithumb.BithumbResponse;
+import com.coingazua.zotminer.api.bithumb.BithumbResponseCode;
+import com.coingazua.zotminer.api.bithumb.model.BalanceInfo;
+import com.coingazua.zotminer.api.bithumb.model.RecentTransaction;
+import com.coingazua.zotminer.domain.common.model.Currency;
+import com.coingazua.zotminer.domain.transaction.entity.TransactionsHistory;
+import com.coingazua.zotminer.domain.user.entity.UserExchange;
 
 /**
  * Created by uienw00 on 2018. 1. 22..
  */
-public class BithumbApi {
+public class BithumbApi<T extends BithumbResponse> {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static String baseUrl;
 
     @Value("${api.base.url.bithumb}")
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
+    public String baseUrl;
 
     private enum ApiUrl {
-        RECENT_TRANSACTIONS(baseUrl + "/public/recent_transactions/%s");
+        RECENT_TRANSACTIONS("/public/recent_transactions/%s"),
+        BALANCE_INFO("/info/balance");
 
         private final String value;
 
@@ -37,12 +43,35 @@ public class BithumbApi {
         }
     }
 
+    /**
+     * 최근 거래 내역 조회
+     * @param exchangeSeq
+     * @param currency
+     * @return
+     */
     public List<TransactionsHistory> recentTransaction(Long exchangeSeq, Currency currency) {
-        String uri = String.format(ApiUrl.RECENT_TRANSACTIONS.value, currency.name());
-        RecentTransactionResponse response = restTemplate.getForObject(uri, RecentTransactionResponse.class);
-        List<RecentTransaction> recentTransactions = getResult(response.getStatus(), response.getData());
+        String url = baseUrl + String.format(ApiUrl.RECENT_TRANSACTIONS.value, currency.name());
+        ResponseEntity<BithumbResponse<RecentTransaction>> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<BithumbResponse<RecentTransaction>>() {
+        });
+
+        List<RecentTransaction> recentTransactions = getResult(response.getBody().getStatus(), response.getBody().getData());
         return recentTransactions.stream().map(recentTransaction -> recentTransaction.convertTransactionsHistory(exchangeSeq))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * 지갑 정보
+     * @param exchangeOrder
+     * @return
+     */
+    public BalanceInfo balanceInfo(ExchangeOrder exchangeOrder){
+        BithumbApiClient api = new BithumbApiClient(baseUrl, exchangeOrder.getApiKey(), exchangeOrder.getSecretKey());
+
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("currency", exchangeOrder.getReservationOrder().getCurrency().name());
+
+        HashMap<String, String> result = api.callApi(ApiUrl.BALANCE_INFO.value, params);
+        return new BalanceInfo(result, exchangeOrder.getReservationOrder().getCurrency());
     }
 
     public <T> T getResult(String status, T body) {

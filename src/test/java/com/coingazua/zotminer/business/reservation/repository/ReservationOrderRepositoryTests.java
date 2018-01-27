@@ -2,7 +2,9 @@ package com.coingazua.zotminer.business.reservation.repository;
 
 import com.coingazua.zotminer.common.util.DateUtil;
 import com.coingazua.zotminer.domain.common.model.Currency;
+import com.coingazua.zotminer.domain.exchange.entity.Exchange;
 import com.coingazua.zotminer.domain.reservation.entity.ReservationOrder;
+import com.coingazua.zotminer.domain.user.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +36,26 @@ public class ReservationOrderRepositoryTests {
     }
 
     @Test
-    @Transactional
+    public void testFindAll() {
+        List<ReservationOrder> result = reservationOrderRepository.findAll();
+        assertTrue(result.size() > 0);
+    }
+
+    @Test
     public void testManyToOne() {
         ReservationOrder result = reservationOrderRepository.findOne(1L);
-        assertNotNull(result.getUser().getUserId());
-        assertNotNull(result.getExchange().getExchangeName());
+        assertNotNull(result);
     }
 
     @Test
     public void testGetGroupBy(){
         List<Currency> result = reservationOrderRepository.getGroupBy(true);
         assertTrue(result.size() > 0);
+    }
+
+    @Test
+    public void testFindByUserSeqAndExchangeSeqAndIsOrderAndIsUse(){
+        List<ReservationOrder> result =reservationOrderRepository.findByUserSeqAndExchangeSeqAndIsOrderAndIsUse(1L, 1L, false, true);
+        assertNotNull(result);
     }
 }

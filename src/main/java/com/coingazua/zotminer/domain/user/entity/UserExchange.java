@@ -1,5 +1,6 @@
 package com.coingazua.zotminer.domain.user.entity;
 
+import com.coingazua.zotminer.domain.exchange.entity.Exchange;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,7 +12,7 @@ import java.util.Date;
 @Table(catalog = "zotMiner", name = "user_exchange")
 @Getter
 @Setter
-@ToString(exclude = "reservationOrderList")
+@ToString(exclude = {"user", "exchange"})
 public class UserExchange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,9 @@ public class UserExchange {
 
     @Column(name = "user_seq", nullable = false)
     private Long userSeq;
+
+    @Column(name = "exchange_seq", nullable = false)
+    private Long exchangeSeq;
 
     @Column(name = "account_id", nullable = false)
     private String accountId;
@@ -34,7 +38,11 @@ public class UserExchange {
     @Column(name = "create_dt", nullable = false)
     private Date createDt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_seq", insertable = false, updatable = false)
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exchange_seq", insertable = false, updatable = false)
+    private Exchange exchange;
 }

@@ -1,4 +1,4 @@
-package com.coingazua.zotminer.api.bithumb.model;
+package com.coingazua.zotminer.api.bithumb;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class RecentTransactionResponse {
+public class BithumbResponse<T> {
     private String status;
-    private List<RecentTransaction> data;
+    private List<T> data;
 }

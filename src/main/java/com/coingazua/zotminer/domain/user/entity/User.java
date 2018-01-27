@@ -26,19 +26,19 @@ public class User {
     @Column(name = "user_id", nullable = false)
     private String userId;
 
+    @Column(name = "is_use", nullable = false)
+    private boolean isUse = true;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_dt", nullable = false)
     private Date createDt;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<ReservationOrder> reservationOrderList = new ArrayList<ReservationOrder>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<UserExchange> userExchangeList = new ArrayList<UserExchange>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Order> orderList = new ArrayList<Order>();
 }

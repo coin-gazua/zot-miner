@@ -17,5 +17,4 @@ public class ApiConfiguration {
     public BithumbApi bithumbApi() {
         return new BithumbApi();
     }
-
 }
