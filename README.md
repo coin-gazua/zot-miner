@@ -10,6 +10,8 @@
 ### jssecacerts 적용
  1. curl -O https://gist.githubusercontent.com/lesstif/cd26f57b7cfd2cd55241b20e05b5cd93/raw/InstallCert.java
  2. javac InstallCert.java
- 3. 1로 저장 -> jssecacerts 파일 생성 됨
- 4. jssecacerts 파일 -> ${JAVA_HOME}/jre/lib/security/ 로 복사
- 5. 애플리케이션 재실행
+ 3. InstallCert 구동
+ * java -cp ./ InstallCert api.bithumb.com
+ 4. 1로 저장 -> jssecacerts 파일 생성 됨
+ 5. jssecacerts 파일 -> ${JAVA_HOME}/jre/lib/security/ 로 복사
+ 6. 애플리케이션 재실행
